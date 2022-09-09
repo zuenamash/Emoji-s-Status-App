@@ -81,9 +81,10 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     } override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.miLogout) {
+        if (item.itemId == R.id.MiLogout) {
             Log.i(TAG, "Logout")
             auth.signOut()
+            // Here we are loging out the user and we want to clear
             val logoutIntent = Intent(this, LoginActivity::class.java)
             logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(logoutIntent)
