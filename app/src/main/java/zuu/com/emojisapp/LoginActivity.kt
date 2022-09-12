@@ -13,11 +13,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-//import  kotlinx.androidx.synthetic.main.activity_login
+//import  kotlinx.android.synthetic.main.activity_login
 
 class LoginActivity : AppCompatActivity() {
 
-    private companion object LoginActivity {
+        private companion object LoginActivity {
         private const val TAG = "LoginActivity"
         private const val RC_GOOGLE_SIGN_IN = 4926
     }
@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
         val googleSignInClient = GoogleSignIn.getClient(this, gso)
         btnSignIn.setOnClickListener {
             val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN)
+           startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN)
         }
 
     }

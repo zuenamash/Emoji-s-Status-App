@@ -17,6 +17,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import android.view.*
+import android.widget.LinearLayout
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.ktx.firestore
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 data class User(
@@ -63,21 +69,23 @@ class MainActivity : AppCompatActivity() {
             .setLifecycleOwner(this).build()
         val adapter = object: FirestoreRecyclerAdapter<User, UserViewHolder>(options) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-                val view = LayoutInflater.from(this@MainActivity).inflate(android.R.layout.simple_list_item_2, parent, false)
+                val view = LayoutInflater.from(this@MainActivity)
+                    .inflate(android.R.layout.simple_list_item_2, parent, false)
                 return UserViewHolder(view)
             }
+
             override fun onBindViewHolder(holder: UserViewHolder, position: Int, model: User) {
-                val tvName: TextView= holder.itemView.findViewById(android.R.id.text1)
+                val tvName: TextView = holder.itemView.findViewById(android.R.id.text1)
                 val tvEmojis: TextView = holder.itemView.findViewById(android.R.id.text2)
                 tvName.text = model.displayName
                 tvEmojis.text = model.emojis
             }
         }
         rvUsers.adapter = adapter
-        rvUsers.layoutManager = LinearLayoutManager(this)
+        rvuUsers.layoutManager = LinearLayoutManager(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     } override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -88,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             val logoutIntent = Intent(this, LoginActivity::class.java)
             logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(logoutIntent)
-        } else if (item.itemId == R.id.miEdit) {
+        } else if (item.itemId == R.id.textView) {
             showAlertDialog()
         }
         return super.onOptionsItemSelected(item)
